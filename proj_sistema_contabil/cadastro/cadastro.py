@@ -1,15 +1,15 @@
 from tkinter import *
 from tkinter.ttk import Frame, Label, Entry, Button
 
-def salvar_cadastro():
+def save_register():
     cnpj = entry_cnpj.get()
-    empresa = entry_empresa.get()
-    apelido = entry_apelido.get()
+    company = entry_company.get()
+    nickName = entry_nickName.get()
     inscricao_municipal = entry_inscricao_municipal.get()
-    print(f"CNPJ: {cnpj}, Empresa: {empresa}, Apelido: {apelido}, Inscrição Municipal: {inscricao_municipal}")
+    print(f"CNPJ: {cnpj}, Empresa: {company}, Apelido: {nickName}, Inscrição Municipal: {inscricao_municipal}")
 
-def create_cadastro_frame(content_frame):
-    """Cria o frame de cadastro dentro do content_frame"""
+def create_register_frame(content_frame):
+    """create the frame of register into the content_frame"""
     Label(content_frame, text="Cadastro de Empresa").grid(column=0, row=0, columnspan=2, pady=10)
 
     Label(content_frame, text="CNPJ:").grid(column=0, row=1, sticky=W, pady=5)
@@ -19,16 +19,16 @@ def create_cadastro_frame(content_frame):
     entry_cnpj.configure(foreground="black")
 
     Label(content_frame, text="Empresa:").grid(column=0, row=2, sticky=W, pady=5)
-    global entry_empresa
-    entry_empresa = Entry(content_frame, width=30)
-    entry_empresa.grid(column=1, row=2, pady=5)
-    entry_empresa.configure(foreground="black")
+    global entry_company
+    entry_company = Entry(content_frame, width=30)
+    entry_company.grid(column=1, row=2, pady=5)
+    entry_company.configure(foreground="black")
 
     Label(content_frame, text="Apelido:").grid(column=0, row=3, sticky=W, pady=5)
-    global entry_apelido
-    entry_apelido = Entry(content_frame, width=30)
-    entry_apelido.grid(column=1, row=3, pady=5)
-    entry_apelido.configure(foreground="black")
+    global entry_nickName
+    entry_nickName = Entry(content_frame, width=30)
+    entry_nickName.grid(column=1, row=3, pady=5)
+    entry_nickName.configure(foreground="black")
 
     Label(content_frame, text="Inscrição Municipal:").grid(column=0, row=4, sticky=W, pady=5)
     global entry_inscricao_municipal
