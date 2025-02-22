@@ -3,6 +3,8 @@ from tkinter.ttk import Style, Frame, Label, Button
 import cadastro.cadastrar as cadastro
 import cadastro.selecionar_empresa as selecionar_empresa
 import cadastro.importar_notas as importar_notas
+import cadastro.relatorios as relatorios
+import cadastro.notas_fiscais as notas_fiscais
 import cadastro.app_globals as app_globals
 
 class Home:
@@ -67,6 +69,14 @@ class Home:
         """Creates the select company screen"""
         selecionar_empresa.create_select_company_frame(self.content_frame)
 
+    def _reports(self) -> None:
+        """Creates the reports screen"""
+        relatorios.create_reports_frame(self.content_frame)
+
+    def _show_invoices(self) -> None:
+        """Shows all invoices for the last selected company"""
+        notas_fiscais.show_client_invoices(self.content_frame)
+
     def _setup_layout(self) -> None:
         """Configures the layout of the main window"""
 
@@ -90,15 +100,16 @@ class Home:
         button_frame.grid(row=1, column=0, sticky=W+E)
         
         Button(button_frame, text="Selecionar Empresa", command=self._select_company, style="DarkBlue.TButton").grid(column=0, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Cadastrar", command=self._register).grid(column=1, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Importar Notas", command=self._import_notes).grid(column=2, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Exportar Faturamento", command=self._export_revenue).grid(column=3, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Emitir DAS", command=self._issue_das).grid(column=4, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Emitir Recibo", command=self._issue_receipt).grid(column=5, row=0, sticky=W+E, padx=5, pady=5)
-        Button(button_frame, text="Quit", command=self.root.destroy).grid(column=6, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Notas Fiscais", command=self._show_invoices).grid(column=1, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Cadastrar", command=self._register).grid(column=2, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Importar Notas", command=self._import_notes).grid(column=3, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Relatorios", command=self._reports).grid(column=4, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Emitir DAS", command=self._issue_das).grid(column=5, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Emitir Recibo", command=self._issue_receipt).grid(column=6, row=0, sticky=W+E, padx=5, pady=5)
+        Button(button_frame, text="Quit", command=self.root.destroy).grid(column=7, row=0, sticky=W+E, padx=5, pady=5)
 
         # Configuring the grid to expand the buttons equally
-        for i in range(7):
+        for i in range(8):
             button_frame.grid_columnconfigure(i, weight=1)
 
 if __name__ == "__main__":
