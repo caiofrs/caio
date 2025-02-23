@@ -1,6 +1,7 @@
 from tkinter import Tk
 from library.interface.home import Home
 
+
 def main() -> None:
     """Main function to start the application"""
     root = Tk()

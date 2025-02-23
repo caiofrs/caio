@@ -47,12 +47,6 @@ class Home:
         else:
             importar_notas.create_import_notes_frame(self.content_frame)
 
-    def _export_revenue(self) -> None:
-        """Creates the export revenue screen"""
-        for widget in self.content_frame.winfo_children():
-            widget.destroy()
-        Label(self.content_frame, text="Tela de Exportar Faturamento").grid()
-
     def _issue_das(self) -> None:
         """Creates the issue DAS screen"""
         for widget in self.content_frame.winfo_children():
@@ -71,7 +65,11 @@ class Home:
 
     def _reports(self) -> None:
         """Creates the reports screen"""
-        relatorios.create_reports_frame(self.content_frame)
+        if app_globals.selected_company is None:
+            print("No company selected. Please select a company first.")
+            Label(self.content_frame, text="Por favor, selecione uma empresa primeiro.", foreground="red").grid(column=0, row=0, columnspan=3, pady=10)
+        else:
+            relatorios.create_reports_frame(self.content_frame)
 
     def _show_invoices(self) -> None:
         """Shows all invoices for the last selected company"""

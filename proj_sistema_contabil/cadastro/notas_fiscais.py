@@ -101,8 +101,17 @@ def show_client_invoices(content_frame):
         # Processar os dados
         df_invoices['data_emissao'] = pd.to_datetime(df_invoices['data_emissao'], format='%Y-%m-%d %H:%M:%S', errors='coerce')
         df_invoices['competencia'] = df_invoices['data_emissao'].dt.strftime('%Y-%m')
-        df_invoices['valor_nota'] = pd.to_numeric(df_invoices['valor_nota'].str.replace(',', '.'), errors='coerce')
+        
+        # Converter valor_nota para numérico, lidando com separadores de milhares e decimais
+        df_invoices['valor_nota'] = (
+        df_invoices['valor_nota']
+        .str.replace('.', '', regex=False)  # Remove os pontos (separadores de milhares)
+        .str.replace(',', '.', regex=False)  # Substitui a vírgula por ponto (separador decimal)
+        .pipe(pd.to_numeric, errors='coerce'))  # Converte para numérico
+            
+        # Preencher valores nulos com 0
         df_invoices['valor_nota'] = df_invoices['valor_nota'].fillna(0)
+
 
         # Agrupar por competência
         df_grouped = df_invoices.groupby('competencia').agg({'valor_nota': 'sum'}).reset_index()
