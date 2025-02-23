@@ -3,11 +3,8 @@ from tkinter import ttk, messagebox
 import sqlite3
 import os
 import pandas as pd
-import sys
 import cadastro.app_globals as app_globals
-# Adicione o caminho do módulo
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import cadastro.app_globals as app_globals
+
 
 def create_select_company_frame(content_frame):
     """Creates the frame to select a company"""
